@@ -23,11 +23,29 @@ namespace PracticaAreas {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            float baseRectangulo = float.Parse(txtBaseRectangulo.Text);
-            float alturaRectangulo = float.Parse(txtAlturaRectangulo.Text);
-            float areaRectangulo = baseRectangulo * alturaRectangulo;
-            lblAreaRectangulo.Text = areaRectangulo.ToString();
+            double area = 0.0;
+            switch(cbTipoFigura.SelectedIndex) {
+                case 0: // Rectángulo
+                    break;
+                case 1: // Triángulo
+                    break;
+                case 2: // Círculo
+                    break;
+                case 3: // Trapecio
+                    break;
+                default:
+                    break;
+            }
+            lblResultadoArea.Text = area.ToString();
+
         }
+
+        //private void Button_Click(object sender, RoutedEventArgs e) {
+        //    float baseRectangulo = float.Parse(txtBaseRectangulo.Text);
+        //    float alturaRectangulo = float.Parse(txtAlturaRectangulo.Text);
+        //    float areaRectangulo = baseRectangulo * alturaRectangulo;
+        //    lblAreaRectangulo.Text = areaRectangulo.ToString();
+        //}
 
         private void btnTriangulo_Click(object sender, RoutedEventArgs e) {
             float baseTriangulo = float.Parse(txtBaseTriangulo.Text);
@@ -38,7 +56,7 @@ namespace PracticaAreas {
 
         private void btnCirculo_Click(object sender, RoutedEventArgs e) {
             float radioCirculo = float.Parse(txtBaseCirculo.Text);
-            float areaCirculo =  (float)Math.PI * (radioCirculo * radioCirculo);
+            float areaCirculo = (float)Math.PI * (radioCirculo * radioCirculo);
             lblAreaCirculo.Text = areaCirculo.ToString();
         }
 
@@ -48,6 +66,26 @@ namespace PracticaAreas {
             float alturaTrapecio = float.Parse(txtAlturaTrapecio.Text);
             float areaTrapecio = ((baseMayorTrapecio + baseMenorTrapecio) / 2) * alturaTrapecio;
             lblAreaTrapecio.Text = areaTrapecio.ToString();
+        }
+
+        private void cbTipoFigura_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            panelConfiguracion.Children.Clear();
+            switch (cbTipoFigura.SelectedIndex) {
+                case 0: // Rectángulo
+                    panelConfiguracion.Children.Add(new ControlAreaRectangulo());
+                    break;
+                case 1: // Triángulo
+                    panelConfiguracion.Children.Add(new ControlAreaTriangulo());
+                    break;
+                case 2: // Círculo
+                    panelConfiguracion.Children.Add(new ControlAreaCirculo());
+                    break;
+                case 3: // Trapecio
+                    panelConfiguracion.Children.Add(new ControlAreaTrapecio());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
