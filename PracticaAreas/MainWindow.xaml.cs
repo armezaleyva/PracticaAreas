@@ -22,52 +22,6 @@ namespace PracticaAreas {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            double area = 0.0;
-            switch(cbTipoFigura.SelectedIndex) {
-                case 0: // Rectángulo
-                    break;
-                case 1: // Triángulo
-                    break;
-                case 2: // Círculo
-                    break;
-                case 3: // Trapecio
-                    break;
-                default:
-                    break;
-            }
-            lblResultadoArea.Text = area.ToString();
-
-        }
-
-        //private void Button_Click(object sender, RoutedEventArgs e) {
-        //    float baseRectangulo = float.Parse(txtBaseRectangulo.Text);
-        //    float alturaRectangulo = float.Parse(txtAlturaRectangulo.Text);
-        //    float areaRectangulo = baseRectangulo * alturaRectangulo;
-        //    lblAreaRectangulo.Text = areaRectangulo.ToString();
-        //}
-
-        private void btnTriangulo_Click(object sender, RoutedEventArgs e) {
-            float baseTriangulo = float.Parse(txtBaseTriangulo.Text);
-            float alturaTriangulo = float.Parse(txtAlturaTriangulo.Text);
-            float areaRectangulo = (baseTriangulo * alturaTriangulo) / 2;
-            lblAreaTriangulo.Text = areaRectangulo.ToString();
-        }
-
-        private void btnCirculo_Click(object sender, RoutedEventArgs e) {
-            float radioCirculo = float.Parse(txtBaseCirculo.Text);
-            float areaCirculo = (float)Math.PI * (radioCirculo * radioCirculo);
-            lblAreaCirculo.Text = areaCirculo.ToString();
-        }
-
-        private void btnTrapecio_Click(object sender, RoutedEventArgs e) {
-            float baseMayorTrapecio = float.Parse(txtBaseMayorTrapecio.Text);
-            float baseMenorTrapecio = float.Parse(txtBaseMenorTrapecio.Text);
-            float alturaTrapecio = float.Parse(txtAlturaTrapecio.Text);
-            float areaTrapecio = ((baseMayorTrapecio + baseMenorTrapecio) / 2) * alturaTrapecio;
-            lblAreaTrapecio.Text = areaTrapecio.ToString();
-        }
-
         private void cbTipoFigura_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             panelConfiguracion.Children.Clear();
             switch (cbTipoFigura.SelectedIndex) {
@@ -86,6 +40,40 @@ namespace PracticaAreas {
                 default:
                     break;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            double area = 0.0;
+            switch(cbTipoFigura.SelectedIndex) {
+                case 0: // Rectángulo
+                    var controlAreaRectangulo = (ControlAreaRectangulo)panelConfiguracion.Children[0];
+                    float baseRectangulo = float.Parse(controlAreaRectangulo.txtBaseRectangulo.Text);
+                    float alturaRectangulo = float.Parse(controlAreaRectangulo.txtBaseRectangulo.Text);
+                    area = baseRectangulo * alturaRectangulo;
+                    break;
+                case 1: // Triángulo
+                    var controlAreaTriangulo = (ControlAreaTriangulo)panelConfiguracion.Children[0];
+                    float baseTriangulo = float.Parse(controlAreaTriangulo.txtBaseTriangulo.Text);
+                    float alturaTriangulo = float.Parse(controlAreaTriangulo.txtAlturaTriangulo.Text);
+                    area = (baseTriangulo * alturaTriangulo) / 2;
+                    break;
+                case 2: // Círculo
+                    var controlAreaCirculo = (ControlAreaCirculo)panelConfiguracion.Children[0];
+                    float radioCirculo = float.Parse(controlAreaCirculo.txtBaseCirculo.Text);
+                    area = (float)Math.PI * (radioCirculo * radioCirculo);
+                    break;
+                case 3: // Trapecio
+                    var controlAreaTrapecio = (ControlAreaTrapecio)panelConfiguracion.Children[0];
+                    float baseMayorTrapecio = float.Parse(controlAreaTrapecio.txtBaseMayorTrapecio.Text);
+                    float baseMenorTrapecio = float.Parse(controlAreaTrapecio.txtBaseMenorTrapecio.Text);
+                    float alturaTrapecio = float.Parse(controlAreaTrapecio.txtAlturaTrapecio.Text);
+                    area = ((baseMayorTrapecio + baseMenorTrapecio) / 2) * alturaTrapecio;
+                    break;
+                default:
+                    break;
+            }
+            lblResultadoArea.Text = area.ToString();
+
         }
     }
 }
